@@ -3,720 +3,776 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
+    <title>CyberCore - The Future of AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- RESET & BASICS --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
+            --bg-dark: #05050a;
+            --bg-card: #0f0f1a;
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --text-main: #e0e0ff;
+            --text-dim: #8a8aab;
+            --border-color: rgba(0, 243, 255, 0.2);
         }
 
         body {
-            background-color: var(--light);
-            color: var(--text);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
+        a {
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
+            color: inherit;
         }
 
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            padding: 0 20px;
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--neon-blue);
+            z-index: -1;
+            transition: width 0.3s ease;
         }
 
         .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--neon-blue);
         }
 
-        section {
-            padding: 5rem 0;
+        .btn:hover::before {
+            width: 100%;
         }
 
-        .section-title {
+        .btn-secondary {
+            color: var(--neon-purple);
+            border-color: var(--neon-purple);
+        }
+
+        .btn-secondary::before {
+            background: var(--neon-purple);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+
+        .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .section-title h2 {
+        .section-header h2 {
             font-size: 2.5rem;
-            color: var(--primary);
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
         }
 
-        .section-title h2::after {
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .logo span {
+            color: var(--neon-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .menu-btn {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(5, 5, 10, 0.7), var(--bg-dark)),
+                        url('https://images.unsplash.com/photo-1535868463750-c78d9543614f?q=80&w=2076&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Matrix Grid Effect Overlay */
+        .hero::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            color: var(--text-dim);
+        }
+
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        /* --- PARTNERS LOGOS (New Layout) --- */
+        .partners {
+            padding: 3rem 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .logo-track {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            opacity: 0.5;
+            flex-wrap: wrap;
+        }
+
+        .logo-track i {
+            font-size: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .logo-track i:hover {
+            color: var(--neon-blue);
+            transform: scale(1.2);
+            opacity: 1;
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* --- SERVICES GRID --- */
+        .services {
+            padding: 8rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(15, 15, 26, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(188, 19, 254, 0.1);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--text-dim);
+            font-size: 1rem;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            transform: translateX(-100%);
             transition: transform 0.5s ease;
         }
 
-        .about-img:hover img {
-            transform: scale(1.05);
+        .service-card:hover::before {
+            transform: translateX(100%);
         }
 
-        .about-text h3 {
-            font-size: 1.8rem;
+        /* --- FEATURED TECH (Zig Zag Layout) --- */
+        .tech-showcase {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--bg-dark), #0a0a14);
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .tech-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .tech-info {
+            flex: 1;
+        }
+
+        .tech-info h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--white);
         }
 
-        .about-text p {
-            margin-bottom: 1.5rem;
+        .tech-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
         }
 
-        .stats {
+        .tech-info ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .tech-info ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-info ul li i {
+            color: var(--neon-blue);
+        }
+
+        .tech-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .tech-visual img {
+            width: 100%;
+            border-radius: 5px;
+            filter: grayscale(100%) contrast(120%);
+            transition: all 0.5s;
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-visual:hover img {
+            filter: grayscale(0%) contrast(100%);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+        }
+
+        /* --- PRICING (New Section Type) --- */
+        .pricing {
+            padding: 8rem 0;
+            background: var(--bg-card);
+            position: relative;
+        }
+
+        .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .stat-item {
+        .price-card {
+            background: var(--bg-dark);
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            border: 1px solid #333;
+            transition: 0.3s;
         }
 
-        .stat-item:hover {
-            transform: translateY(-10px);
+        .price-card.featured {
+            border: 1px solid var(--neon-blue);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
         }
 
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
+        .price-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--dark);
+            color: var(--text-dim);
         }
 
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+        .price {
+            font-size: 3.5rem;
+            font-weight: 700;
             color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
             margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
+        .price span {
+            font-size: 1rem;
+            color: var(--text-dim);
         }
 
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
         }
 
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- FOOTER --- */
         footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            background: #020205;
         }
 
-        .footer-content {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .footer-column h3 {
-            font-size: 1.3rem;
+        .footer-about p {
+            color: var(--text-dim);
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
             margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
+            color: var(--white);
         }
 
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
+        .footer-col ul {
             list-style: none;
         }
 
-        .footer-links li {
+        .footer-col ul li {
             margin-bottom: 0.8rem;
         }
 
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .footer-col ul li a {
+            color: var(--text-dim);
+            transition: 0.3s;
         }
 
-        .footer-links li a:hover {
-            color: var(--accent);
+        .footer-col ul li a:hover {
+            color: var(--neon-blue);
             padding-left: 5px;
         }
 
-        .social-links {
+        .newsletter-form {
             display: flex;
-            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+        .newsletter-form input {
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
             color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            width: 100%;
+            outline: none;
         }
 
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
+        .newsletter-form button {
+            padding: 10px 20px;
+            background: var(--neon-blue);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #555;
+            font-size: 0.9rem;
         }
 
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* --- ANIMATION & MEDIA QUERIES --- */
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.5rem; }
+            .tech-item { flex-direction: column !important; text-align: left; gap: 2rem; }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .nav-links {
+                display: none; /* Simplified for mobile for this demo */
             }
+            .menu-btn { display: block; }
             
-            .hero p {
-                font-size: 1.1rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
             
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
+            .footer-grid { grid-template-columns: 1fr; }
             
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
+            .pricing-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><i class="fa-solid fa-microchip"></i> CYBER<span>CORE</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Interface</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#technology">Technology</a></li>
+            <li><a href="#pricing">Access</a></li>
+        </ul>
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
+        <a href="#" class="btn" style="display: none; @media(min-width: 768px){display:inline-block;}">System Login</a>
+    </nav>
+
+    <!-- Hero -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
+            <h1 class="typing-text">Evolve Beyond <br> <span style="color: var(--neon-purple);">Human Limits</span></h1>
+            <p>We build the neural architecture for the next generation of sentient AI. Integrate with the hive mind today.</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#solutions" class="btn">Initialize</a>
+                <a href="#technology" class="btn btn-secondary">Read Protocols</a>
             </div>
         </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
+    <!-- Partners / Trusted By -->
+    <div class="partners">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+            <div class="logo-track">
+                <i class="fa-brands fa-google"></i>
+                <i class="fa-brands fa-aws"></i>
+                <i class="fa-brands fa-meta"></i>
+                <i class="fa-brands fa-microsoft"></i>
+                <i class="fa-brands fa-space-awesome"></i>
+                <i class="fa-solid fa-robot"></i>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <section class="services" id="solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Directives</h2>
+                <p>Advanced capabilities deployed globally via quantum cloud.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Neural Processing</h3>
+                    <p>Mimicking human cognition at 1000x speed using our proprietary Synapse-X chips.</p>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Cyber Defense</h3>
+                    <p>AI-driven firewalls that adapt to threats in real-time. Zero-day protection guaranteed.</p>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <h3>Quantum Uplink</h3>
+                    <p>Data transfer speeds that defy physical limitations via entanglement protocols.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-eye"></i>
+                    <h3>Predictive Vision</h3>
+                    <p>Computer vision systems capable of analyzing behavioral patterns and predicting outcomes.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
+    <!-- Tech Showcase -->
+    <section class="tech-showcase" id="technology">
         <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+            
+            <div class="tech-item">
+                <div class="tech-info">
+                    <h2>Robotics Integration</h2>
+                    <p>Our hardware division seamlessly merges software intelligence with mechanical precision. From industrial automation to personal android assistants.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Titanium Alloy Skeleton</li>
+                        <li><i class="fa-solid fa-check"></i> 48hr Battery Life</li>
+                        <li><i class="fa-solid fa-check"></i> haptic Feedback Sensors</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">View Blueprints</a>
+                </div>
+                <div class="tech-visual">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Robot Tech">
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <h2>Big Data Analytics</h2>
+                    <p>Process exabytes of information in seconds. Our algorithms find patterns in chaos, turning raw noise into actionable strategy for mega-corporations.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Real-time visualization</li>
+                        <li><i class="fa-solid fa-check"></i> Encrypted storage</li>
+                        <li><i class="fa-solid fa-check"></i> Automated reporting</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Explore Data</a>
+                </div>
+                <div class="tech-visual">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Data Analytics">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Access Tiers</h2>
+                <p>Choose your level of integration with the CyberCore network.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Initiate</h3>
+                    <div class="price">$499<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Basic Neural Access</li>
+                        <li>Standard Support</li>
+                        <li>1TB Cloud Storage</li>
+                        <li>Public API Key</li>
+                    </ul>
+                    <a href="#" class="btn">Select</a>
+                </div>
+                <div class="price-card featured">
+                    <div style="color: var(--neon-blue); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Most Popular</div>
+                    <h3>Operative</h3>
+                    <div class="price">$999<span>/mo</span></div>
+                    <ul class="features-list">
+                        <li>Advanced AI Modeling</li>
+                        <li>24/7 Priority Uplink</li>
+                        <li>Unlimited Storage</li>
+                        <li>Dedicated Hardware</li>
+                        <li>Cyber Security Suite</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Select</a>
+                </div>
+                <div class="price-card">
+                    <h3>Architect</h3>
+                    <div class="price">Custom</div>
+                    <ul class="features-list">
+                        <li>Full Source Code Access</li>
+                        <li>On-site Server Installation</li>
+                        <li>Custom Algorithm Design</li>
+                        <li>Quantum Encryption</li>
+                    </ul>
+                    <a href="#" class="btn">Contact Sales</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo"><i class="fa-solid fa-microchip"></i> CYBER<span>CORE</span></div>
+                    <p>Pioneering the synthesis of biological and digital intelligence. We are the bridge to tomorrow.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Sitemap</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">AI Ethics</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Neural Newsletter</h4>
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 10px;">Get the latest firmware updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter email...">
+                        <button><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#"><i class="fa-brands fa-twitter" style="color: #fff;"></i></a>
+                        <a href="#"><i class="fa-brands fa-github" style="color: #fff;"></i></a>
+                        <a href="#"><i class="fa-brands fa-discord" style="color: #fff;"></i></a>
                     </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+                &copy; 2088 CyberCore Solutions. System All Green.
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        // Navbar Blur Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '1rem 4rem';
+                nav.style.background = 'rgba(5, 5, 10, 0.95)';
+            } else {
+                nav.style.padding = '1.5rem 4rem';
+                nav.style.background = 'rgba(5, 5, 10, 0.8)';
+            }
         });
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
+        // Simple Typing Effect for Hero
+        const text = "Evolve Beyond Human Limits";
+        const typingElement = document.querySelector('.typing-text');
+        // Note: For a real production site, we would use a JS typing loop here, 
+        // but the HTML structure provides a static fallback.
+        
+        // Intersection Observer for Fade-in elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }
+        }, { threshold: 0.1 });
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+        document.querySelectorAll('.service-card, .tech-item').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
         });
     </script>
 </body>
-
 </html>
